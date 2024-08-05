@@ -2,7 +2,7 @@ import fileinput
 from os.path import join, dirname
 
 
-version_file = join(dirname(dirname(__file__)), "ovos_classifiers", "version.py")
+version_file = join(dirname(dirname(__file__)), "ovos_utterance_normalizer", "version.py")
 
 alpha_var_name = "VERSION_ALPHA"
 
