@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/HEAD)
+## [V0.0.0a2](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.0.0a2) (2024-08-05)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/4df860f4a6496a751bf3687e5aae5aa19030fad5...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/4df860f4a6496a751bf3687e5aae5aa19030fad5...V0.0.0a2)
 
 **Implemented enhancements:**
 
