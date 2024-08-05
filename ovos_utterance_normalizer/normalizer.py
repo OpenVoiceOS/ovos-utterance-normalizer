@@ -173,7 +173,7 @@ class Normalizer:
 
 
 class CatalanNormalizer(Normalizer):
-    with open(f"{dirname(dirname(__file__))}/res/ca/normalize.json") as f:
+    with open(f"{dirname(__file__)}/res/ca/normalize.json") as f:
         _default_config = json.load(f)
 
     @staticmethod
@@ -182,12 +182,12 @@ class CatalanNormalizer(Normalizer):
 
 
 class CzechNormalizer(Normalizer):
-    with open(f"{dirname(dirname(__file__))}/res/cz/normalize.json", encoding='utf8') as f:
+    with open(f"{dirname(__file__)}/res/cz/normalize.json", encoding='utf8') as f:
         _default_config = json.load(f)
 
 
 class PortugueseNormalizer(Normalizer):
-    with open(f"{dirname(dirname(__file__))}/res/pt/normalize.json") as f:
+    with open(f"{dirname(__file__)}/res/pt/normalize.json") as f:
         _default_config = json.load(f)
 
     @staticmethod
@@ -196,17 +196,17 @@ class PortugueseNormalizer(Normalizer):
 
 
 class RussianNormalizer(Normalizer):
-    with open(f"{dirname(dirname(__file__))}/res/ru/normalize.json", encoding='utf8') as f:
+    with open(f"{dirname(__file__)}/res/ru/normalize.json", encoding='utf8') as f:
         _default_config = json.load(f)
 
 
 class UkrainianNormalizer(Normalizer):
-    with open(f"{dirname(dirname(__file__))}/res/uk/normalize.json", encoding='utf8') as f:
+    with open(f"{dirname(__file__)}/res/uk/normalize.json", encoding='utf8') as f:
         _default_config = json.load(f)
 
 
 class EnglishNormalizer(Normalizer):
-    with open(f"{dirname(dirname(__file__))}/res/en/normalize.json") as f:
+    with open(f"{dirname(__file__)}/res/en/normalize.json") as f:
         _default_config = json.load(f)
 
     def numbers_to_digits(self, utterance: str) -> str:
@@ -214,7 +214,7 @@ class EnglishNormalizer(Normalizer):
 
 
 class AzerbaijaniNormalizer(Normalizer):
-    with open(f"{dirname(dirname(__file__))}/res/az/normalize.json") as f:
+    with open(f"{dirname(__file__)}/res/az/normalize.json") as f:
         _default_config = json.load(f)
 
     def numbers_to_digits(self, utterance: str) -> str:
@@ -222,7 +222,7 @@ class AzerbaijaniNormalizer(Normalizer):
 
 
 class GermanNormalizer(Normalizer):
-    with open(f"{dirname(dirname(__file__))}/res/de/normalize.json") as f:
+    with open(f"{dirname(__file__)}/res/de/normalize.json") as f:
         _default_config = json.load(f)
 
     def numbers_to_digits(self, utterance: str) -> str:
