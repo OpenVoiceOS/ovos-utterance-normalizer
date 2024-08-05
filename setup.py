@@ -50,7 +50,7 @@ def required(requirements_file):
                 if pkg.strip() and not pkg.startswith("#")]
 
 
-extra_files = package_files('ovos-utterance-normalizer/res')
+extra_files = package_files('ovos_utterance_normalizer/res')
 
 
 UTTERANCE_ENTRY_POINT = (
