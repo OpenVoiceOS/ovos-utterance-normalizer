@@ -1,5 +1,9 @@
 # Changelog
 
+## [V0.0.0a4](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.0.0a4) (2024-08-05)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.0.0a3...V0.0.0a4)
+
 ## [V0.0.0a3](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.0.0a3) (2024-08-05)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.0.0a2...V0.0.0a3)
