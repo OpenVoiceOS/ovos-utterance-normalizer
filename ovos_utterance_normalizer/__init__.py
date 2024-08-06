@@ -1,9 +1,12 @@
 import string
 from typing import Optional, List
+
+import ftfy
+from ovos_plugin_manager.templates.transformers import UtteranceTransformer
+
 from ovos_utterance_normalizer.normalizer import Normalizer, CatalanNormalizer, CzechNormalizer, \
     PortugueseNormalizer, AzerbaijaniNormalizer, RussianNormalizer, EnglishNormalizer, UkrainianNormalizer, \
     GermanNormalizer
-from ovos_plugin_manager.templates.transformers import UtteranceTransformer
 
 
 class UtteranceNormalizerPlugin(UtteranceTransformer):
@@ -48,7 +51,10 @@ class UtteranceNormalizerPlugin(UtteranceTransformer):
         # 1 - expand contractions
         # 2 - original utterance
         # 3 - normalized utterance
+        fix_unicode = self.config.get("fix_encoding_errors", True)
         for u in utterances:
+            if fix_unicode:
+                u = ftfy.fix_text(u)
             norm.append(normalizer.expand_contractions(u))
             norm.append(u)
             norm.append(normalizer.normalize(u))
@@ -58,4 +64,3 @@ class UtteranceNormalizerPlugin(UtteranceTransformer):
 
         # this deduplicates the list while keeping order
         return list(dict.fromkeys(norm)), context
-
