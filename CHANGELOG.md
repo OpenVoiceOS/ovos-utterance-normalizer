@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/HEAD)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.0.0a5...HEAD)
+
+**Implemented enhancements:**
+
+- feat/fix\_encoding\_errors [\#2](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/2) ([JarbasAl](https://github.com/JarbasAl))
+
+## [V0.0.0a5](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.0.0a5) (2024-08-05)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.0.0a4...V0.0.0a5)
+
 ## [V0.0.0a4](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.0.0a4) (2024-08-05)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.0.0a3...V0.0.0a4)
