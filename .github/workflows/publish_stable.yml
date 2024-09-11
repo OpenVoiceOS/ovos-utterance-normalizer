@@ -10,7 +10,7 @@ jobs:
     secrets: inherit
     with:
       branch: 'master'
-      version_file: 'ovos_ocp_bandcamp_plugin/version.py'
+      version_file: 'ovos_utterance_normalizer/version.py'
       setup_py: 'setup.py'
       publish_release: true
 
