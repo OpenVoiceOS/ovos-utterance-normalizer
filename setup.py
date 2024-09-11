@@ -57,10 +57,15 @@ UTTERANCE_ENTRY_POINT = (
     'ovos-utterance-normalizer=ovos_utterance_normalizer:UtteranceNormalizerPlugin'
 )
 
+with open(os.path.join(BASEDIR, "README.md"), "r") as f:
+    long_description = f.read()
+
 
 setup(
     name='ovos-utterance-normalizer',
     version=get_version(),
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author='jarbasai',
     author_email='jarbasai@mailfence.com',
     url='https://github.com/OpenVoiceOS/ovos-utterance-normalizer',
