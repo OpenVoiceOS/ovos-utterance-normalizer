@@ -1,36 +1,21 @@
 # Changelog
 
-## [V0.0.0](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.0.0) (2024-08-06)
+## [0.2.1a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.1a1) (2024-09-11)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.0.0a6...V0.0.0)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.2.0a1...0.2.1a1)
 
-## [V0.0.0a6](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.0.0a6) (2024-08-06)
+**Merged pull requests:**
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.0.0a5...V0.0.0a6)
+- feat:semver [\#5](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/5) ([JarbasAl](https://github.com/JarbasAl))
+- feat:semver [\#4](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/4) ([JarbasAl](https://github.com/JarbasAl))
 
-**Implemented enhancements:**
+## [V0.2.0a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.2.0a1) (2024-09-10)
 
-- feat/fix\_encoding\_errors [\#2](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/2) ([JarbasAl](https://github.com/JarbasAl))
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.1.0...V0.2.0a1)
 
-## [V0.0.0a5](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.0.0a5) (2024-08-05)
+**Merged pull requests:**
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.0.0a4...V0.0.0a5)
-
-## [V0.0.0a4](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.0.0a4) (2024-08-05)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.0.0a3...V0.0.0a4)
-
-## [V0.0.0a3](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.0.0a3) (2024-08-05)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.0.0a2...V0.0.0a3)
-
-## [V0.0.0a2](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.0.0a2) (2024-08-05)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/4df860f4a6496a751bf3687e5aae5aa19030fad5...V0.0.0a2)
-
-**Implemented enhancements:**
-
-- initial port [\#1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/1) ([JarbasAl](https://github.com/JarbasAl))
+- chore:semver\_versioning [\#3](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/3) ([JarbasAl](https://github.com/JarbasAl))
 
 
 
