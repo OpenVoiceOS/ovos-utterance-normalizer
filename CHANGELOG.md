@@ -1,21 +1,12 @@
 # Changelog
 
-## [0.2.1a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.1a1) (2024-09-11)
+## [0.2.2a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.2a1) (2025-06-08)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.2.0a1...0.2.1a1)
-
-**Merged pull requests:**
-
-- feat:semver [\#5](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/5) ([JarbasAl](https://github.com/JarbasAl))
-- feat:semver [\#4](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/4) ([JarbasAl](https://github.com/JarbasAl))
-
-## [V0.2.0a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/V0.2.0a1) (2024-09-10)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/V0.1.0...V0.2.0a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.1...0.2.2a1)
 
 **Merged pull requests:**
 
-- chore:semver\_versioning [\#3](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/3) ([JarbasAl](https://github.com/JarbasAl))
+- allow opm 1.X.X [\#7](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/7) ([JarbasAl](https://github.com/JarbasAl))
 
 
 
