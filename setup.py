@@ -62,7 +62,7 @@ with open(os.path.join(BASEDIR, "README.md"), "r") as f:
 
 
 setup(
-    name='ovos-utterance-normalizer',
+    name='ovos_utterance_normalizer',
     version=get_version(),
     long_description=long_description,
     long_description_content_type="text/markdown",
