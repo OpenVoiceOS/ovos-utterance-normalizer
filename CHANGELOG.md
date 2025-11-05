@@ -1,12 +1,12 @@
 # Changelog
 
-## [0.2.2a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.2a1) (2025-06-08)
+## [0.2.3a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.3a1) (2025-11-05)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.1...0.2.2a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.2...0.2.3a1)
 
 **Merged pull requests:**
 
-- allow opm 1.X.X [\#7](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/7) ([JarbasAl](https://github.com/JarbasAl))
+- Update requirements.txt [\#10](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/10) ([JarbasAl](https://github.com/JarbasAl))
 
 
 
