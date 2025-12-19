@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.4a2](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.4a2) (2025-12-19)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.4a1...0.2.4a2)
+
+**Merged pull requests:**
+
+- Update dependency python to 3.14 [\#14](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/14) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [0.2.4a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.4a1) (2025-12-18)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.3...0.2.4a1)
