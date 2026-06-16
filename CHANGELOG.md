@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.4a3](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.4a3) (2026-06-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.4a2...0.2.4a3)
+
+**Merged pull requests:**
+
+- chore: add missing shared CI workflows [\#21](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/21) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.2.4a2](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.4a2) (2025-12-19)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.4a1...0.2.4a2)
