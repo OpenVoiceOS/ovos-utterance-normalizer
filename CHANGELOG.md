@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.4a4](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.4a4) (2026-06-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.4a3...0.2.4a4)
+
+**Merged pull requests:**
+
+- chore: modernize packaging to pyproject.toml [\#23](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/23) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.2.4a3](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.4a3) (2026-06-16)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.4a2...0.2.4a3)
