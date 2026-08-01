@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.5a2](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.5a2) (2026-08-01)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.5a1...0.2.5a2)
+
+**Merged pull requests:**
+
+- docs: rewrite README in Simplified Technical English [\#27](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/27) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.2.5a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.5a1) (2026-06-16)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.4a4...0.2.5a1)
