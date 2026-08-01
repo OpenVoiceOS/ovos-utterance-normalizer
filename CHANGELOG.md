@@ -1,12 +1,52 @@
 # Changelog
 
-## [0.2.3a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.3a1) (2025-11-05)
+## [0.2.5a2](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.5a2) (2026-08-01)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.2...0.2.3a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.5a1...0.2.5a2)
 
 **Merged pull requests:**
 
-- Update requirements.txt [\#10](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/10) ([JarbasAl](https://github.com/JarbasAl))
+- docs: rewrite README in Simplified Technical English [\#27](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/27) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.2.5a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.5a1) (2026-06-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.4a4...0.2.5a1)
+
+**Merged pull requests:**
+
+- fix: require ovos-plugin-manager\>=2.1.0 for opm.\* entry points and cap ovos-\* deps at next major [\#25](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/25) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.2.4a4](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.4a4) (2026-06-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.4a3...0.2.4a4)
+
+**Merged pull requests:**
+
+- chore: modernize packaging to pyproject.toml [\#23](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/23) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.2.4a3](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.4a3) (2026-06-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.4a2...0.2.4a3)
+
+**Merged pull requests:**
+
+- chore: add missing shared CI workflows [\#21](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/21) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.2.4a2](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.4a2) (2025-12-19)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.4a1...0.2.4a2)
+
+**Merged pull requests:**
+
+- Update dependency python to 3.14 [\#14](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/14) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [0.2.4a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.4a1) (2025-12-18)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.3...0.2.4a1)
+
+**Merged pull requests:**
+
+- Configure Renovate [\#13](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/13) ([renovate[bot]](https://github.com/apps/renovate))
 
 
 

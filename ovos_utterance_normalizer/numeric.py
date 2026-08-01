@@ -394,6 +394,8 @@ class GermanNumberParser:
             list of extraced numbers (ReplaceableNumber)
 
         """
+        if not tokens:
+            return []
         if not isinstance(tokens[0], Token): # list of string tokens
             tokens = [Token(word, index) for index, word in enumerate(tokens)]
         numbers_to_replace = self._extract_numbers_with_text_de(tokens, short_scale, ordinals, fractions)
@@ -940,6 +942,8 @@ class EnglishNumberParser:
             list of extraced numbers (ReplaceableNumber)
 
         """
+        if not tokens:
+            return []
         if not isinstance(tokens[0], Token): # list of string tokens
             tokens = [Token(word, index) for index, word in enumerate(tokens)]
         numbers_to_replace = self._extract_numbers_with_text_en(tokens, short_scale, ordinals)
@@ -1620,6 +1624,8 @@ class AzerbaijaniNumberParser:
             list of extraced numbers (ReplaceableNumber)
 
         """
+        if not tokens:
+            return []
         if not isinstance(tokens[0], Token): # list of string tokens
             tokens = [Token(word, index) for index, word in enumerate(tokens)]
         numbers_to_replace = self._extract_numbers_with_text_az(tokens, short_scale, ordinals)
