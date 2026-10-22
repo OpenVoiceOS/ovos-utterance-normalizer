@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.6a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.6a1) (2026-10-22)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.5a2...0.2.6a1)
+
+**Merged pull requests:**
+
+- fix\(deps\): accept ovos-plugin-manager 3 [\#29](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/29) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.2.5a2](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.5a2) (2026-08-01)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.5a1...0.2.5a2)
