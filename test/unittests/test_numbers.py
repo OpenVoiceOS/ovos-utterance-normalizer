@@ -40,10 +40,10 @@ class TestNumbersToDigits(unittest.TestCase):
         self.assertEqual(normalize("stelle einen timer für fünf minuten", "de-DE"),
                          "stelle einen timer für 5 minuten")
 
-    def test_spanish_keeps_words(self):
-        # es is outside NUMBER_LANGUAGES: numtag reads "mil gracias" as 1000
-        self.assertEqual(normalize("tengo treinta y dos años", "es-ES"), "tengo treinta y dos años")
-        self.assertEqual(normalize("pon una alarma a las siete", "es-ES"), "pon una alarma a las siete")
+    def test_spanish(self):
+        # 30 + 2
+        self.assertEqual(normalize("tengo treinta y dos años", "es-ES"), "tengo 32 años")
+        self.assertEqual(normalize("pon una alarma a las siete", "es-ES"), "pon una alarma a las 7")
         # "un" is the article of "20 por ciento"
         self.assertEqual(normalize("bajar el brillo a un 20 por ciento", "es-ES"),
                          "bajar el brillo a un 20 por ciento")
@@ -81,6 +81,15 @@ class TestNumbersToDigits(unittest.TestCase):
         # Romanian "o" alone is the pronoun "her", Hungarian "egy" alone the article "a"
         self.assertEqual(normalize("o", "ro-RO"), "o")
         self.assertEqual(normalize("egy", "hu-HU"), "egy")
+
+    def test_idiom_keeps_number_value(self):
+        # numtag does no idiom detection: "mil" is 1000 in "mil gracias" too
+        self.assertEqual(normalize("mil gracias", "es-ES"), "1000 gracias")
+        self.assertEqual(normalize("desde cero", "es-ES"), "desde 0")
+        # da and gl are outside NUMBER_LANGUAGES: numtag reads an article as 1
+        # (da "en" before a hyphenated noun, gl "unha" alone)
+        self.assertEqual(normalize("tusind tak", "da-DK"), "tusind tak")
+        self.assertEqual(normalize("unha", "gl-ES"), "unha")
 
     def test_language_in_set_without_own_normalizer(self):
         # Finnish kymmeneksi: translative case of kymmenen, 10

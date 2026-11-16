@@ -22,16 +22,16 @@ The plugin removes punctuation from the start and the end of each candidate, and
 
 ## Numbers
 
-The plugin reads numbers with [numtag](https://github.com/TigreGotico/numtag), only in the languages of `NUMBER_LANGUAGES`: an, ar, bg, cs, de, en, et, fi, he, hr, id, nb, pt, sk, sl, tr and uk. Every other language passes through unchanged. A language enters the set when a value check over the shipped skill locales finds no new wrong digit for it.
+The plugin reads numbers with [numtag](https://github.com/TigreGotico/numtag), only in the languages of `NUMBER_LANGUAGES`: an, ar, bg, cs, de, en, es, et, fi, he, hr, id, nb, pt, sk, sl, tr and uk. Every other language passes through unchanged. A language enters the set when a value check over the shipped skill locales finds no new wrong digit for it.
 
-Only a whole-number cardinal said in words becomes digits, at numtag confidence 0.5 or more. Ordinals, fractions and decimals keep their words. Most articles keep their words too, but numtag reads some articles as numbers, as in German "eine Audio-Erinnerung". See the known misreads in [docs/numbers.md](docs/numbers.md#known-misreads).
+Only a whole-number cardinal said in words becomes digits, at numtag confidence 0.5 or more. Ordinals, fractions and decimals keep their words. Most articles keep their words too, but numtag reads some articles as numbers, as in German "eine Audio-Erinnerung". See the known misreads in [docs/numbers.md](docs/numbers.md#known-misreads). numtag does not find idioms or titles, so a number word in an idiom also becomes digits: "mil gracias" gives "1000 gracias".
 
 | Language | Input | Normalized candidate |
 |---|---|---|
 | pt-PT | põe um temporizador de vinte e cinco minutos | põe um temporizador 25 minutos |
 | en-US | the twenty first of may | the twenty first of may |
 | de-DE | stell einen Timer auf fünfundzwanzig Minuten | stell einen Timer auf 25 Minuten |
-| es-ES | tengo treinta y dos años | tengo treinta y dos años |
+| es-ES | tengo treinta y dos años | tengo 32 años |
 
 See [docs/numbers.md](docs/numbers.md) and [docs/languages.md](docs/languages.md).
 

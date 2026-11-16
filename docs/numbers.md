@@ -44,16 +44,16 @@ Each row shows the output of `numbers_to_digits`:
 | de-DE | eins komma fünf | eins komma fünf |
 | fi-FI | laita ajastin kymmeneksi minuutiksi | laita ajastin 10 minuutiksi |
 | cs-CZ | nastav časovač na dvacet pět minut | nastav časovač na 25 minut |
-| es-ES | tengo treinta y dos años | tengo treinta y dos años |
+| es-ES | tengo treinta y dos años | tengo 32 años |
 | fr-FR | mets le volume à cinquante pour cent | mets le volume à cinquante pour cent |
 
-es and fr are not in `NUMBER_LANGUAGES`, so their number words stay.
+fr is not in `NUMBER_LANGUAGES`, so its number words stay.
 
 ## Languages with number reading
 
 The normalizer reads numbers only in the languages of `NUMBER_LANGUAGES` in `normalizer.py`:
 
-an, ar, bg, cs, de, en, et, fi, he, hr, id, nb, pt, sk, sl, tr, uk
+an, ar, bg, cs, de, en, es, et, fi, he, hr, id, nb, pt, sk, sl, tr, uk
 
 The normalizer compares the first subtag of the language tag with the set, so "pt-BR" and "pt_PT" are in the set. Every other language keeps all its number words, also when numtag has a lexicon for it.
 
@@ -61,8 +61,20 @@ A language enters the set when a value check finds no new wrong digit for it. Th
 
 numtag has a lexicon for more languages. These languages are not in the set:
 
-- ca, da, el, es, eu, fa, fr, gl, hu, it, kab, nl, oc, pl, ro, ru and sv: the value check found new wrong digits. See [Known misreads](#known-misreads).
+- ca, da, el, eu, fa, fr, gl, hu, it, kab, nl, oc, pl, ro, ru and sv: the value check found new wrong digits. See [Known misreads](#known-misreads).
 - ast, az, fy, mwl and nn: no shipped skill locale has a number for the value check to examine.
+
+## Idioms, titles and names
+
+numtag does not find idioms, titles or names. A number word keeps its number value in these too, and the normalizer writes the digit. The value check counts these digits as right:
+
+| Language | Input | Output |
+|---|---|---|
+| es-ES | mil gracias | 1000 gracias |
+| es-ES | empezar desde cero | empezar desde 0 |
+| es-ES | temperaturas bajo cero | temperaturas bajo 0 |
+| fi-FI | kuka kirjoitti Seitsemän veljestä | kuka kirjoitti 7 veljestä |
+| de-DE | type null | type 0 |
 
 ## Language of the reading
 
@@ -85,5 +97,4 @@ These misreads keep a language out of the set:
 - the Basque article "bat" after a noun: "pantaila-argazki bat" gives "pantaila-argazki 1".
 - Persian weekday names written with a space: "سه شنبه" (Tuesday) gives "3 شنبه".
 - "not a single one" and "the same": Russian "ни одного" gives "ни 1", "одно и то же" gives "1 и то же", and Polish "ani jedna" gives "ani 1".
-- an article or a pronoun alone in a vocabulary file: Hungarian "egy" (the article "a") and Romanian "o" (the pronoun "her") give "1".
-- idioms: Spanish "mil gracias" and Galician "mil grazas" give 1000, Danish "tusind tak" gives "1000 tak", and Spanish and Galician "desde cero" ("from the start") give "desde 0".
+- an article or a pronoun alone in a vocabulary file: Galician "un" and "unha" and Hungarian "egy" (the article "a"), and Romanian "o" (the pronoun "her"), give "1".

@@ -6,7 +6,7 @@ Two separate things depend on the language: the number reading and the other set
 
 The normalizer converts numbers only in the languages of `NUMBER_LANGUAGES` in `normalizer.py`:
 
-an, ar, bg, cs, de, en, et, fi, he, hr, id, nb, pt, sk, sl, tr, uk
+an, ar, bg, cs, de, en, es, et, fi, he, hr, id, nb, pt, sk, sl, tr, uk
 
 Every other language passes through unchanged: the normalizer keeps every number word. For example, Japanese "五分" stays "五分", and French "cinquante minutes" stays "cinquante minutes". A language enters the set when a value check over the shipped skill locales finds no new wrong digit for it. See [numbers.md](numbers.md#languages-with-number-reading).
 
@@ -34,4 +34,4 @@ Each class receives the full tag, and gives it to numtag. So "pt-BR" uses the Po
 
 The Portuguese and Catalan classes use their own tokenizer. The Portuguese tokenizer splits hyphenated words ("acorda-me" gives "acorda - me"). The Catalan tokenizer keeps them whole. The German class splits a hyphenated word into two words when it removes symbols.
 
-The package also holds settings files for es, fr, it, nl, no, sl and sv. No class reads them. These languages use the generic `Normalizer`, which does not remove symbols. Of these languages, only sl is in `NUMBER_LANGUAGES`.
+The package also holds settings files for es, fr, it, nl, no, sl and sv. No class reads them. These languages use the generic `Normalizer`, which does not remove symbols. Of these languages, es and sl are in `NUMBER_LANGUAGES`.
