@@ -3,8 +3,13 @@ import re
 from os.path import dirname
 from typing import List, Dict
 
+from numtag import Form, Kind, tag_numbers
+
 from ovos_utterance_normalizer.tokenization import word_tokenize
-from ovos_utterance_normalizer.numeric import EnglishNumberParser, AzerbaijaniNumberParser, GermanNumberParser
+
+# numtag scores a lone article ("uma pizza", "ein Bier") 0.3 and a word whose
+# common meaning is no number ("um segundo", "half past") 0.4: both stay words
+MIN_NUMBER_CONFIDENCE = 0.5
 
 
 class Normalizer:
@@ -15,9 +20,11 @@ class Normalizer:
     normalize_XX should pass a valid config read from json
     """
     _default_config = {}
+    lang = None
 
-    def __init__(self, config=None):
+    def __init__(self, config=None, lang=None):
         self.config = config or self._default_config
+        self.lang = lang or self.lang
 
     @staticmethod
     def tokenize(utterance) -> List[str]:
@@ -60,10 +67,6 @@ class Normalizer:
         return self.config.get("word_replacements", {})
 
     @property
-    def number_replacements(self) -> Dict[str, str]:
-        return self.config.get("number_replacements", {})
-
-    @property
     def accents(self) -> Dict[str, str]:
         return self.config.get("accents",
                                {"á": "a", "à": "a", "ã": "a", "â": "a",
@@ -103,11 +106,24 @@ class Normalizer:
         return utterance
 
     def numbers_to_digits(self, utterance: str) -> str:
-        words = self.tokenize(utterance)
-        for idx, w in enumerate(words):
-            if w in self.number_replacements:
-                words[idx] = self.number_replacements[w]
-        utterance = " ".join(words)
+        """Write each whole number said in words as digits: "vinte e cinco" becomes "25".
+
+        Only cardinals change. Ordinals ("primeiro"), fractions and decimals
+        ("sete e meia", often a clock time) stay words, and so do the mentions
+        numtag scores below MIN_NUMBER_CONFIDENCE.
+        """
+        if not self.lang:
+            return utterance
+        try:
+            mentions = tag_numbers(utterance, self.lang)
+        except ValueError:  # numtag has no lexicon for this language
+            return utterance
+        for mention in reversed(mentions):
+            if mention.kind is not Kind.CARDINAL or mention.form is Form.DIGITS \
+                    or mention.confidence < MIN_NUMBER_CONFIDENCE:
+                continue
+            start, end = mention.char_span
+            utterance = utterance[:start] + mention.value + utterance[end:]
         return utterance
 
     def remove_articles(self, utterance: str) -> str:
@@ -152,10 +168,11 @@ class Normalizer:
         # mutations
         if self.should_lowercase:
             utterance = utterance.lower()
-        if self.should_expand_contractions:
-            utterance = self.expand_contractions(utterance)
+        # numbers first: the tokenizer splits words such as "п’ять"
         if self.should_numbers_to_digits:
             utterance = self.numbers_to_digits(utterance)
+        if self.should_expand_contractions:
+            utterance = self.expand_contractions(utterance)
         utterance = self.replace_words(utterance)
 
         # removals
@@ -173,6 +190,7 @@ class Normalizer:
 
 
 class CatalanNormalizer(Normalizer):
+    lang = "ca"
     with open(f"{dirname(__file__)}/res/ca/normalize.json") as f:
         _default_config = json.load(f)
 
@@ -182,11 +200,13 @@ class CatalanNormalizer(Normalizer):
 
 
 class CzechNormalizer(Normalizer):
-    with open(f"{dirname(__file__)}/res/cz/normalize.json", encoding='utf8') as f:
+    lang = "cs"
+    with open(f"{dirname(__file__)}/res/cs/normalize.json", encoding='utf8') as f:
         _default_config = json.load(f)
 
 
 class PortugueseNormalizer(Normalizer):
+    lang = "pt"
     with open(f"{dirname(__file__)}/res/pt/normalize.json") as f:
         _default_config = json.load(f)
 
@@ -196,37 +216,33 @@ class PortugueseNormalizer(Normalizer):
 
 
 class RussianNormalizer(Normalizer):
+    lang = "ru"
     with open(f"{dirname(__file__)}/res/ru/normalize.json", encoding='utf8') as f:
         _default_config = json.load(f)
 
 
 class UkrainianNormalizer(Normalizer):
+    lang = "uk"
     with open(f"{dirname(__file__)}/res/uk/normalize.json", encoding='utf8') as f:
         _default_config = json.load(f)
 
 
 class EnglishNormalizer(Normalizer):
+    lang = "en"
     with open(f"{dirname(__file__)}/res/en/normalize.json") as f:
         _default_config = json.load(f)
 
-    def numbers_to_digits(self, utterance: str) -> str:
-        return EnglishNumberParser().convert_words_to_numbers(utterance)
-
 
 class AzerbaijaniNormalizer(Normalizer):
+    lang = "az"
     with open(f"{dirname(__file__)}/res/az/normalize.json") as f:
         _default_config = json.load(f)
 
-    def numbers_to_digits(self, utterance: str) -> str:
-        return AzerbaijaniNumberParser().convert_words_to_numbers(utterance)
-
 
 class GermanNormalizer(Normalizer):
+    lang = "de"
     with open(f"{dirname(__file__)}/res/de/normalize.json") as f:
         _default_config = json.load(f)
-
-    def numbers_to_digits(self, utterance: str) -> str:
-        return GermanNumberParser().convert_words_to_numbers(utterance)
     
     def remove_symbols(self, utterance: str) -> str:
         # special rule for hyphanated words in german as some STT engines falsely

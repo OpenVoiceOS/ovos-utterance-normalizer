@@ -40,6 +40,10 @@ Normalization is language-specific. English, Portuguese, Ukrainian, Catalan, Cze
 Azerbaijani, Russian, and German each have a dedicated normalizer. Other languages fall
 back to the generic normalizer.
 
+Numbers are read with [numtag](https://github.com/TigreGotico/numtag), in every language
+that numtag reads. A whole number said in words becomes digits: "vinte e cinco" becomes
+"25". Ordinals, fractions, decimals and articles ("uma pizza") keep their words.
+
 ## Related projects
 
 - [ovos-plugin-manager](https://github.com/OpenVoiceOS/ovos-plugin-manager), which loads
