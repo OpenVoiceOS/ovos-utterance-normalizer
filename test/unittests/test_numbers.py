@@ -149,6 +149,17 @@ class TestNumbersToDigits(unittest.TestCase):
             self.assertEqual(normalize(f"szólj {word}", "hu-HU"), f"szólj {word}")
         self.assertEqual(normalize("egy órakor", "hu-HU"), "egy órakor")
 
+    def test_hungarian_verb_hat_stays_word(self):
+        self.assertEqual(normalize("a gyógyszer nem hat", "hu-HU"), "a gyógyszer nem hat")
+        self.assertEqual(normalize("hat óra", "hu-HU"), "6 óra")
+        self.assertEqual(normalize("hatkor", "hu-HU"), "6-kor")
+
+    def test_hungarian_egybe_stays_word(self):
+        self.assertEqual(normalize("Összeraktuk egybe a darabokat.", "hu-HU"), "Összeraktuk egybe a darabokat .")
+
+    def test_hungarian_egytol_egyig_stays_words(self):
+        self.assertEqual(normalize("Egytől egyig mind ott voltak.", "hu-HU"), "Egytől egyig mind ott voltak .")
+
     def test_hungarian_number_without_suffix(self):
         self.assertEqual(normalize("állíts be öt percet", "hu-HU"), "állíts be 5 percet")
         self.assertEqual(normalize("ötszáz", "hu-HU"), "500")
