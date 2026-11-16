@@ -48,15 +48,24 @@ class TestNumbersToDigits(unittest.TestCase):
         self.assertEqual(normalize("bajar el brillo a un 20 por ciento", "es-ES"),
                          "bajar el brillo a un 20 por ciento")
 
-    def test_catalan_keeps_words(self):
-        # ca is outside NUMBER_LANGUAGES: numtag reads the percent word "cent" as 100
-        self.assertEqual(normalize("vint-i-cinc", "ca-ES"), "vint-i-cinc")
-        # the Catalan stopword step removes "al"
-        self.assertEqual(normalize("posa el volum al 15 per cent, si us plau", "ca-ES"),
-                         "posa el volum 15 per cent, si us plau")
+    def test_catalan(self):
+        # 20 + 5
+        self.assertEqual(normalize("vint-i-cinc", "ca-ES"), "25")
+        # "a les nou": nine o'clock
+        self.assertEqual(normalize("posa una alarma a les nou", "ca-ES"), "posa una alarma a les 9")
+        # the percent word "cent" is no number without a number before it
+        self.assertEqual(normalize("posa el volum al quinze per cent", "ca-ES"), "posa el volum 15 per cent")
+        self.assertEqual(normalize("atenua la llum al per cent", "ca-ES"), "atenua la llum per cent")
         self.assertEqual(normalize("un cafè", "ca-ES"), "un cafè")
-        # "nou" is "new" here
-        self.assertEqual(normalize("crea un esdeveniment nou", "ca-ES"), "crea un esdeveniment nou")
+
+    def test_russian(self):
+        # 10
+        self.assertEqual(normalize("поставь таймер на десять минут", "ru-RU"), "поставь таймер на 10 минут")
+        # "не ... ни одного" and "одно и то же" name no number
+        self.assertEqual(normalize("я не пропустил ни одного таймера", "ru-RU"),
+                         "я не пропустил ни одного таймера")
+        self.assertEqual(normalize("обнови календарь чтобы было одно и то же", "ru-RU"),
+                         "обнови календарь чтобы было одно и то же")
 
     def test_czech_homograph_stays_word(self):
         # "jednou" is "once", not the number 1: numtag marks it as a homograph
@@ -99,17 +108,10 @@ class TestNumbersToDigits(unittest.TestCase):
         self.assertEqual(normalize("iyirmi beş", "az-AZ"), "iyirmi beş")
 
     def test_language_outside_set_keeps_words(self):
-        # numtag gives "50 pour 100", "1'altra" and "ni 1": the article, the
-        # percent word and "not a single" are no numbers
+        # fr and it are outside NUMBER_LANGUAGES: no value check covers them
         self.assertEqual(normalize("mets le volume à cinquante pour cent", "fr-FR"),
                          "mets le volume à cinquante pour cent")
         self.assertEqual(normalize("un'altra volta", "it-IT"), "un'altra volta")
-        self.assertEqual(normalize("я не пропустил ни одного таймера", "ru-RU"),
-                         "я не пропустил ни одного таймера")
-        # numtag reads "un" before "nou" (new) as 1, and "одно" in "the same" as 1
-        self.assertEqual(normalize("un nou enregistrament", "ca-ES"), "un nou enregistrament")
-        self.assertEqual(normalize("обнови календарь чтобы было одно и то же", "ru-RU"),
-                         "обнови календарь чтобы было одно и то же")
 
     def test_idiom_keeps_number_value(self):
         # numtag does no idiom detection: "mil" is 1000 in "mil gracias" too

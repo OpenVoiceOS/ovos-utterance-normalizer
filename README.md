@@ -22,7 +22,7 @@ The plugin removes punctuation from the start and the end of each candidate, and
 
 ## Numbers
 
-The plugin reads numbers with [numtag](https://github.com/TigreGotico/numtag), only in the languages of `NUMBER_LANGUAGES`: an, ar, bg, cs, de, en, es, et, fi, gl, he, hr, hu, id, nb, pt, ro, sk, sl, tr and uk. Every other language passes through unchanged. A language enters the set when a value check over the shipped skill locales finds no new wrong digit for it.
+The plugin reads numbers with [numtag](https://github.com/TigreGotico/numtag), only in the languages of `NUMBER_LANGUAGES`: an, ar, bg, ca, cs, de, en, es, et, fi, gl, he, hr, hu, id, nb, pt, ro, ru, sk, sl, tr and uk. Every other language passes through unchanged. A language enters the set when a value check over the shipped skill locales finds no new wrong digit for it.
 
 Only a whole-number cardinal said in words becomes digits, when numtag marks it as no article and no word with another meaning. Ordinals, fractions and decimals keep their words. Articles keep their words too. numtag still reads the English pronoun "one" as a number, as in "read the next one". See the known misreads in [docs/numbers.md](docs/numbers.md#known-misreads). numtag does not find idioms or titles, so a number word in an idiom also becomes digits: "mil gracias" gives "1000 gracias".
 

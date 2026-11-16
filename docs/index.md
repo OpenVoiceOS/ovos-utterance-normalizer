@@ -17,4 +17,4 @@
 
 ## Requirements
 
-The package needs Python 3.11 or newer (`requires-python = ">=3.11"` in `pyproject.toml`). It reads numbers with [numtag](https://github.com/TigreGotico/numtag) (`numtag>=0.10.8a1`).
+The package needs Python 3.11 or newer (`requires-python = ">=3.11"` in `pyproject.toml`). It reads numbers with [numtag](https://github.com/TigreGotico/numtag) (`numtag>=0.10.12a1`).
