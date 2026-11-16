@@ -82,18 +82,19 @@ class TestNumbersToDigits(unittest.TestCase):
         self.assertEqual(normalize("pon unha alarma", "gl-ES"), "pon unha alarma")
         self.assertEqual(normalize("unha", "gl-ES"), "unha")
 
-    def test_hungarian(self):
-        # "két" is 2; the article "egy" stays a word
-        self.assertEqual(normalize("ébressz fel két óra múlva", "hu-HU"), "ébressz fel 2 óra múlva")
-        self.assertEqual(normalize("mondj egy viccet", "hu-HU"), "mondj egy viccet")
-        self.assertEqual(normalize("egy", "hu-HU"), "egy")
-
     def test_romanian(self):
         # "zece" is 10; "o" is the article or the pronoun "her", never the number 1
         self.assertEqual(normalize("setează un cronometru de zece minute", "ro-RO"),
                          "setează un cronometru de 10 minute")
         self.assertEqual(normalize("pune o alarmă", "ro-RO"), "pune o alarmă")
         self.assertEqual(normalize("o", "ro-RO"), "o")
+
+    def test_several_numbers_in_one_utterance(self):
+        # 30 and 5: each span keeps its place while the text changes
+        self.assertEqual(normalize("set a timer for thirty seconds and five minutes", "en-US"),
+                         "set a timer for 30 seconds and 5 minutes")
+        self.assertEqual(normalize("pon un temporizador de veinte minutos y treinta segundos", "es-ES"),
+                         "pon un temporizador de 20 minutos y 30 segundos")
 
     def test_czech(self):
         # 20 + 5
@@ -117,8 +118,11 @@ class TestNumbersToDigits(unittest.TestCase):
         # numtag does no idiom detection: "mil" is 1000 in "mil gracias" too
         self.assertEqual(normalize("mil gracias", "es-ES"), "1000 gracias")
         self.assertEqual(normalize("desde cero", "es-ES"), "desde 0")
-        # da is outside NUMBER_LANGUAGES: numtag reads "en" before a hyphenated noun as 1
+        # da is outside NUMBER_LANGUAGES: no value check covers it
         self.assertEqual(normalize("tusind tak", "da-DK"), "tusind tak")
+        # hu is outside NUMBER_LANGUAGES: "ötkor" is 5 with the suffix "-kor", which a bare digit loses
+        self.assertEqual(normalize("hozz létre egy emlékeztetőt hogy ötkor vegyek kenyeret", "hu-HU"),
+                         "hozz létre egy emlékeztetőt hogy ötkor vegyek kenyeret")
 
     def test_language_in_set_without_own_normalizer(self):
         # Finnish kymmeneksi: translative case of kymmenen, 10

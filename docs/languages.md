@@ -6,11 +6,11 @@ Two separate things depend on the language: the number reading and the other set
 
 The normalizer converts numbers only in the languages of `NUMBER_LANGUAGES` in `normalizer.py`:
 
-an, ar, bg, ca, cs, de, en, es, et, fi, gl, he, hr, hu, id, nb, pt, ro, ru, sk, sl, tr, uk
+an, ar, bg, ca, cs, de, en, es, et, fi, gl, he, hr, id, nb, pt, ro, ru, sk, sl, tr, uk
 
 Every other language passes through unchanged: the normalizer keeps every number word. For example, Japanese "五分" stays "五分", and French "cinquante minutes" stays "cinquante minutes". A language enters the set when a value check over the shipped skill locales finds no new wrong digit for it. See [numbers.md](numbers.md#languages-with-number-reading).
 
-numtag 0.8.2a1 has lexicons for these tags, a larger list than the set:
+numtag 0.10.12a1 has lexicons for these tags, a larger list than the set:
 
 an, ar, ast, az, bg, ca, cs, da, de, el, en, es, et, eu, fa, fi, fr-BE, fr-CH, fr-FR, fy, gl, he, hr, hu, id, it, kab, mwl, nb, nl, nn, oc, pl, pt-BR, pt-PT, ro, ru, sk, sl, sv, tr, uk
 

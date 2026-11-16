@@ -13,7 +13,7 @@ WORD_REASONS = frozenset({Reason.ARTICLE, Reason.HOMOGRAPH})
 
 # A language enters this set when a value check over every shipped skill locale finds no new wrong digit
 NUMBER_LANGUAGES = frozenset({"an", "ar", "bg", "ca", "cs", "de", "en", "es", "et", "fi", "gl", "he", "hr",
-                              "hu", "id", "nb", "pt", "ro", "ru", "sk", "sl", "tr", "uk"})
+                              "id", "nb", "pt", "ro", "ru", "sk", "sl", "tr", "uk"})
 
 
 class Normalizer:
