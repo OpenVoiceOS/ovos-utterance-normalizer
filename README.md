@@ -1,57 +1,79 @@
 # ovos-utterance-normalizer
 
-`ovos-utterance-normalizer` is an [OVOS](https://github.com/OpenVoiceOS) plugin that
-normalizes utterances before intent parsing. It expands contractions, converts spoken
-numbers to digits, strips punctuation, and applies other language-specific cleanup so
-that intent parsers get a consistent input.
+`ovos-utterance-normalizer` is an utterance transformer plugin for [OpenVoiceOS](https://github.com/OpenVoiceOS). It runs after speech-to-text and before the intent engines. It gives the intent pipeline extra candidate utterances, and one of these candidates writes numbers as digits.
 
-The plugin also fixes text encoding errors with
-[python-ftfy](https://github.com/rspeer/python-ftfy).
+```python
+from ovos_utterance_normalizer import UtteranceNormalizerPlugin
 
-It is enabled by default in
-[mycroft.conf](https://github.com/OpenVoiceOS/ovos-config/blob/8cfb04319516cad38d39203d14f10d6f0f568390/ovos_config/mycroft.conf#L114).
+plugin = UtteranceNormalizerPlugin()
+plugin.transform(["i'm sure it's twenty past five"], {"lang": "en-US"})[0]
+# ["i'm sure it is twenty past five", "i'm sure it's twenty past five", "i'm sure it is 20 past 5"]
+```
+
+## What the plugin does
+
+For each utterance, `transform` returns up to three candidates in this order:
+
+1. the utterance with its contractions expanded;
+2. the utterance as received;
+3. the normalized utterance, with number words written as digits and the settings of the language applied.
+
+The plugin removes punctuation from the start and the end of each candidate, and it removes duplicates. Before these steps, it repairs text encoding errors with [ftfy](https://github.com/rspeer/python-ftfy). See [docs/candidates.md](docs/candidates.md).
+
+## Numbers
+
+The plugin reads numbers with [numtag](https://github.com/TigreGotico/numtag), in every language that numtag has a lexicon for. A language with no lexicon passes through unchanged. Only a whole-number cardinal said in words becomes digits, at numtag confidence 0.5 or more. Ordinals, fractions, decimals and articles keep their words:
+
+| Language | Input | Normalized candidate |
+|---|---|---|
+| pt-PT | põe um temporizador de vinte e cinco minutos | põe um temporizador 25 minutos |
+| en-US | the twenty first of may | the twenty first of may |
+| de-DE | stell einen Timer auf fünfundzwanzig Minuten | stell einen Timer auf 25 Minuten |
+| es-ES | a las seis y media | a las seis y media |
+
+See [docs/numbers.md](docs/numbers.md) and [docs/languages.md](docs/languages.md).
+
+Digits can help a template or keyword engine with a number slot. They do not help every pipeline: an engine trained on raw speech-to-text output, or an engine based on a large language model, can gain nothing or do worse. No gain is measured. See [docs/intent-matching.md](docs/intent-matching.md).
+
+No OpenVoiceOS specification defines this normalization. OVOS-INTENT-1 §2 names a separate text-normalization specification that does not exist. See [docs/specification.md](docs/specification.md).
 
 ## Install
 
+The package needs Python 3.11 or newer.
+
 ```bash
-pip install ovos-utterance-normalizer
+uv pip install --prerelease=allow ovos-utterance-normalizer
 ```
 
-## Usage
+## Configuration
 
-`ovos-utterance-normalizer` registers as an
-[OVOS PHAL](https://github.com/OpenVoiceOS/ovos-plugin-manager) `opm.transformer.text`
-plugin, named `ovos-utterance-normalizer`. [ovos-core](https://github.com/OpenVoiceOS/ovos-core)
-loads it automatically when it is installed and enabled in the configuration.
+The default `mycroft.conf` of [ovos-config](https://github.com/OpenVoiceOS/ovos-config) turns the plugin on:
 
-For each utterance, the plugin produces up to three variants: the utterance with
-contractions expanded, the original utterance, and the normalized utterance. Punctuation
-is stripped from each variant, and duplicates are removed while keeping the original order.
+```json
+"utterance_transformers": {
+   "ovos-utterance-normalizer": {}
+}
+```
 
-Supported configuration options, under the plugin name in `mycroft.conf`:
-
-| Option | Default | Description |
+| Key | Default | What it does |
 |---|---|---|
-| `lang` | `en-us` | Fallback language, used when no language is given in the utterance context |
-| `fix_encoding_errors` | `true` | Fix encoding errors with `ftfy` before normalizing |
-| `strip_punctuation` | `true` | Strip punctuation from each output variant |
+| `lang` | `"en-us"` | The language to use when the message context has no `lang` |
+| `fix_encoding_errors` | `true` | Repairs encoding errors with ftfy |
+| `strip_punctuation` | `true` | Removes punctuation from the start and the end of each candidate |
+| `active` | `true` | When it is `false`, the plugin does not load |
 
-Normalization is language-specific. English, Portuguese, Ukrainian, Catalan, Czech,
-Azerbaijani, Russian, and German each have a dedicated normalizer. Other languages fall
-back to the generic normalizer.
+See [docs/configuration.md](docs/configuration.md).
 
-Numbers are read with [numtag](https://github.com/TigreGotico/numtag), in every language
-that numtag reads. A whole number said in words becomes digits: "vinte e cinco" becomes
-"25". Ordinals, fractions, decimals and articles ("uma pizza") keep their words.
+## Documentation
+
+The [docs](docs/index.md) directory holds one page for each topic: candidates, the normalized candidate, numbers, languages, contractions, configuration, intent matching and the specification status.
 
 ## Related projects
 
-- [ovos-plugin-manager](https://github.com/OpenVoiceOS/ovos-plugin-manager), which loads
-  and runs this plugin as an `opm.transformer.text` transformer.
-- [ovos-config](https://github.com/OpenVoiceOS/ovos-config), which ships the default
-  `mycroft.conf` that enables this plugin.
-- [ovos-core](https://github.com/OpenVoiceOS/ovos-core), the assistant runtime that
-  calls transformer plugins before intent parsing.
+- [ovos-plugin-manager](https://github.com/OpenVoiceOS/ovos-plugin-manager) loads and runs this plugin as an `opm.transformer.text` transformer.
+- [ovos-config](https://github.com/OpenVoiceOS/ovos-config) holds the default `mycroft.conf` that turns this plugin on.
+- [ovos-core](https://github.com/OpenVoiceOS/ovos-core) calls the utterance transformers before intent matching.
+- [numtag](https://github.com/TigreGotico/numtag) finds the numbers and their values.
 
 ## License
 
