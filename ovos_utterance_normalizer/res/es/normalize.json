@@ -8,7 +8,6 @@
   "remove_stopwords": false,
   "contractions": {},
   "word_replacements": {},
-  "number_replacements": {},
   "stopwords": [],
   "articles": []
 }

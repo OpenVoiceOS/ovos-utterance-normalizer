@@ -20,22 +20,22 @@ class UtteranceNormalizerPlugin(UtteranceTransformer):
     @staticmethod
     def get_normalizer(lang: str):
         if lang.startswith("en"):
-            return EnglishNormalizer()
+            return EnglishNormalizer(lang=lang)
         elif lang.startswith("pt"):
-            return PortugueseNormalizer()
+            return PortugueseNormalizer(lang=lang)
         elif lang.startswith("uk"):
-            return UkrainianNormalizer()
+            return UkrainianNormalizer(lang=lang)
         elif lang.startswith("ca"):
-            return CatalanNormalizer()
-        elif lang.startswith("cz"):
-            return CzechNormalizer()
+            return CatalanNormalizer(lang=lang)
+        elif lang.startswith("cs"):
+            return CzechNormalizer(lang=lang)
         elif lang.startswith("az"):
-            return AzerbaijaniNormalizer()
+            return AzerbaijaniNormalizer(lang=lang)
         elif lang.startswith("ru"):
-            return RussianNormalizer()
+            return RussianNormalizer(lang=lang)
         elif lang.startswith("de"):
-            return GermanNormalizer()
-        return Normalizer()
+            return GermanNormalizer(lang=lang)
+        return Normalizer(lang=lang)
 
     @staticmethod
     def strip_punctuation(utterance: str):
