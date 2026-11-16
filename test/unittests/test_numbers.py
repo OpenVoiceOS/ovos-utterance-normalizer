@@ -122,7 +122,7 @@ class TestNumbersToDigits(unittest.TestCase):
         self.assertEqual(normalize("tusind tak", "da-DK"), "tusind tak")
 
     def test_hungarian_suffix_follows_digit_after_hyphen(self):
-        # AkH 11 265 d): a suffix joins a digit with a hyphen
+        # AkH 12 §265 d): a suffix joins a digit with a hyphen
         self.assertEqual(normalize("hozz létre egy emlékeztetőt hogy ötkor vegyek kenyeret", "hu-HU"),
                          "hozz létre egy emlékeztetőt hogy 5-kor vegyek kenyeret")
         self.assertEqual(normalize("hétfőtől péntekig este hatkor szólj", "hu-HU"),
@@ -132,7 +132,7 @@ class TestNumbersToDigits(unittest.TestCase):
         self.assertEqual(normalize("kettőre állítsd be", "hu-HU"), "2-re állítsd be")
 
     def test_hungarian_suffix_keeps_the_form_of_the_spoken_numeral(self):
-        # AkH 11 102 f): the assimilated form stays (4-gyel, 15%-kal); harmony follows the spoken numeral
+        # AkH 12 §82 f): the assimilated form stays (4-gyel, 15%-kal); harmony follows the spoken numeral
         self.assertEqual(normalize("hattal", "hu-HU"), "6-tal")
         self.assertEqual(normalize("öttel", "hu-HU"), "5-tel")
         self.assertEqual(normalize("hárommal", "hu-HU"), "3-mal")

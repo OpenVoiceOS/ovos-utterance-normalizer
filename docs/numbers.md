@@ -66,7 +66,7 @@ numtag has a lexicon for more languages. These languages are not in the set:
 
 ## Hungarian suffixes
 
-numtag reads "ötkor" (at five) as 5 and reports the whole word, suffix included. Hungarian writes a digit with its suffix after a hyphen (AkH 11, section 265 d): "5-kor". The normalizer finds the stem as the longest prefix that numtag reads as the same number. It keeps the suffix of the word, so the form fits the spoken numeral:
+numtag reads "ötkor" (at five) as 5 and reports the whole word, suffix included. Hungarian writes a digit with its suffix after a hyphen (AkH 12, section 265 d): "5-kor". The normalizer finds the stem as the longest prefix that numtag reads as the same number. It keeps the suffix of the word, so the form fits the spoken numeral:
 
 | Input | Output |
 |---|---|

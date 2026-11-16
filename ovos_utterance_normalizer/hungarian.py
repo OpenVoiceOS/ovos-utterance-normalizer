@@ -1,6 +1,6 @@
 """Hungarian digits with a case suffix.
 
-AkH 11 (helyesiras.mta.hu) section 265 d): "A számjegyekhez, írásjelekhez, rövidítésekhez, betűszókhoz stb.
+AkH 12 (helyesiras.mta.hu/helyesiras/default/akh12) section 265 d): "A számjegyekhez, írásjelekhez, rövidítésekhez, betűszókhoz stb.
 kötőjellel kapcsoljuk a toldalékokat, például: 4-et, 12-t, 19-szer, 32-en (= harmincketten), de: 32-n
 (= harminckettőn)". Section 82 f), for -val/-vel: "a v hasonult alakját mindig feltüntetjük, például: 4-gyel, 15%-kal".
 So "ötkor" is "5-kor" and "hattal" is "6-tal": the suffix keeps the form of the spoken numeral.
