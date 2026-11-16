@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.7a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.7a1) (2026-11-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.6a1...0.2.7a1)
+
+**Merged pull requests:**
+
+- fix: read numbers with numtag [\#31](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/31) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.2.6a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.6a1) (2026-10-22)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.5a2...0.2.6a1)
