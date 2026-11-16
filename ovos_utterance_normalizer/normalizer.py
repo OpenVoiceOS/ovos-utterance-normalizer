@@ -5,6 +5,7 @@ from typing import List, Dict
 
 from numtag import Form, Kind, Reason, tag_numbers
 
+from ovos_utterance_normalizer.hungarian import digits_with_suffix
 from ovos_utterance_normalizer.tokenization import word_tokenize
 
 # numtag marks a lone article ("uma pizza", "ein Bier") and a word whose
@@ -13,7 +14,7 @@ WORD_REASONS = frozenset({Reason.ARTICLE, Reason.HOMOGRAPH})
 
 # A language enters this set when a value check over every shipped skill locale finds no new wrong digit
 NUMBER_LANGUAGES = frozenset({"an", "ar", "bg", "ca", "cs", "de", "en", "es", "et", "fi", "gl", "he", "hr",
-                              "id", "nb", "pt", "ro", "ru", "sk", "sl", "tr", "uk"})
+                              "hu", "id", "nb", "pt", "ro", "ru", "sk", "sl", "tr", "uk"})
 
 
 class Normalizer:
@@ -128,7 +129,12 @@ class Normalizer:
                     or mention.reasons & WORD_REASONS:
                 continue
             start, end = mention.char_span
-            utterance = utterance[:start] + mention.value + utterance[end:]
+            digits = mention.value
+            if self.lang.lower().startswith("hu"):
+                digits = digits_with_suffix(utterance[start:end], mention.value)
+                if digits is None:
+                    continue
+            utterance = utterance[:start] + digits + utterance[end:]
         return utterance
 
     def remove_articles(self, utterance: str) -> str:

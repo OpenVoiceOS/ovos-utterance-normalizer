@@ -53,7 +53,7 @@ fr is not in `NUMBER_LANGUAGES`, so its number words stay.
 
 The normalizer reads numbers only in the languages of `NUMBER_LANGUAGES` in `normalizer.py`:
 
-an, ar, bg, ca, cs, de, en, es, et, fi, gl, he, hr, id, nb, pt, ro, ru, sk, sl, tr, uk
+an, ar, bg, ca, cs, de, en, es, et, fi, gl, he, hr, hu, id, nb, pt, ro, ru, sk, sl, tr, uk
 
 The normalizer compares the first subtag of the language tag with the set, so "pt-BR" and "pt_PT" are in the set. Every other language keeps all its number words, also when numtag has a lexicon for it.
 
@@ -61,9 +61,22 @@ A language enters the set when a value check finds no new wrong digit for it. Th
 
 numtag has a lexicon for more languages. These languages are not in the set:
 
-- hu: numtag reads a number with a time suffix as the bare number ("ötkor", at five, gives "5"), and the normalizer loses the suffix "-kor" that a date parser needs. Hungarian writes a digit with its suffix after a hyphen ("5-kor"). The language enters the set when numtag reports where the stem ends and the suffix starts.
 - da, el, eu, fa, fr, it, kab, nl, oc, pl and sv: no value check has run on the current numtag, so they stay out.
 - ast, az, fy, mwl and nn: no shipped skill locale has a number for the value check to examine.
+
+## Hungarian suffixes
+
+numtag reads "ötkor" (at five) as 5 and reports the whole word, suffix included. Hungarian writes a digit with its suffix after a hyphen (AkH 12, section 265 d): "5-kor". The normalizer finds the stem as the longest prefix that numtag reads as the same number. It keeps the suffix of the word, so the form fits the spoken numeral:
+
+| Input | Output |
+|---|---|
+| ötkor | 5-kor |
+| öttől | 5-től |
+| hattól | 6-tól |
+| hattal | 6-tal |
+| hárommal | 3-mal |
+
+A word stays unchanged when its suffix is not one of the listed case suffixes ("hatnak"), when the stem changes ("hármat", "hatot") or when numtag marks it as another word ("egykor", "hétkor"). "háromszor" is no number for numtag and stays.
 
 ## Idioms, titles and names
 
