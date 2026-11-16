@@ -9,7 +9,7 @@
 | [candidates.md](candidates.md) | The candidate list that `transform` returns, its order and the deduplication |
 | [normalized-utterance.md](normalized-utterance.md) | The steps that make the normalized candidate |
 | [numbers.md](numbers.md) | Which number words become digits, and which stay words |
-| [languages.md](languages.md) | The languages that convert numbers, and the languages with their own settings |
+| [languages.md](languages.md) | The languages that convert numbers (`NUMBER_LANGUAGES`), and the languages with their own settings |
 | [contractions.md](contractions.md) | The contraction tables for each language |
 | [configuration.md](configuration.md) | Installation, `mycroft.conf` keys, how to turn the plugin on and off |
 | [intent-matching.md](intent-matching.md) | When digits can help an intent engine, and when they cannot |

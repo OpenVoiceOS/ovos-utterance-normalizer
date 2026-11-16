@@ -14,7 +14,7 @@ The German table holds the contractions of a preposition and an article: am, ans
 
 ## Case
 
-A key matches only a word with the same case. The plugin does not lowercase the text first. The English table has lowercase keys, and 9 keys that start with "I" ("I'm", "I'd", "I'll", "I've", "I'm'a", "I'm'o", "I'll've", "I'd've", "Whatcha"):
+A key matches only a word with the same case. The plugin does not lowercase the text first. The English table has 166 keys. Nine keys are not lowercase: 8 keys start with "I" ("I'm", "I'd", "I'll", "I've", "I'm'a", "I'm'o", "I'll've", "I'd've"), and the ninth key is "Whatcha":
 
 ```python
 from ovos_utterance_normalizer import UtteranceNormalizerPlugin

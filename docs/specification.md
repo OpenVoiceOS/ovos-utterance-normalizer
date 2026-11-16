@@ -14,6 +14,8 @@ OVOS-INTENT-1 §2 (OpenVoiceOS/architecture, commit f137b15, `intent-1.md` lines
 
 The "separate text-normalization specification" does not exist. The architecture repository holds no such document. Number conversion is not in the list of that clause.
 
+The architecture repository defers number representation to that future specification. `appendix/comparisons.md` (commit f137b15, lines 128 to 131, the list at line 130) says that OVOS "defers the **typed value formats themselves** (date encoding, number representation, duration units) to a future text-normalization spec (§7)". So no specification defines how the normalized candidate writes a number. The digits of this plugin are a choice of the plugin.
+
 The plugin output does not satisfy the input contract of OVOS-INTENT-1 §2 in all cases. With the default settings, the plugin does not write lowercase, and the normalized candidate can keep commas, periods and hyphens.
 
 ## OVOS-TRANSFORM-1 §3.2

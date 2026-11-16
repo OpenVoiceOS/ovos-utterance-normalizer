@@ -40,17 +40,20 @@ class TestNumbersToDigits(unittest.TestCase):
         self.assertEqual(normalize("stelle einen timer für fünf minuten", "de-DE"),
                          "stelle einen timer für 5 minuten")
 
-    def test_spanish(self):
-        # 30 + 2
-        self.assertEqual(normalize("tengo treinta y dos años", "es-ES"), "tengo 32 años")
-        self.assertEqual(normalize("pon una alarma a las siete", "es-ES"), "pon una alarma a las 7")
+    def test_spanish_keeps_words(self):
+        # es is outside NUMBER_LANGUAGES: numtag reads "mil gracias" as 1000
+        self.assertEqual(normalize("tengo treinta y dos años", "es-ES"), "tengo treinta y dos años")
+        self.assertEqual(normalize("pon una alarma a las siete", "es-ES"), "pon una alarma a las siete")
         # "un" is the article of "20 por ciento"
         self.assertEqual(normalize("bajar el brillo a un 20 por ciento", "es-ES"),
                          "bajar el brillo a un 20 por ciento")
 
-    def test_catalan(self):
-        # vint-i-cinc: 20 + 5
-        self.assertEqual(normalize("vint-i-cinc", "ca-ES"), "25")
+    def test_catalan_keeps_words(self):
+        # ca is outside NUMBER_LANGUAGES: numtag reads the percent word "cent" as 100
+        self.assertEqual(normalize("vint-i-cinc", "ca-ES"), "vint-i-cinc")
+        # the Catalan stopword step removes "al"
+        self.assertEqual(normalize("posa el volum al 15 per cent, si us plau", "ca-ES"),
+                         "posa el volum 15 per cent, si us plau")
         self.assertEqual(normalize("un cafè", "ca-ES"), "un cafè")
         # "nou" is "new" here
         self.assertEqual(normalize("crea un esdeveniment nou", "ca-ES"), "crea un esdeveniment nou")
@@ -63,9 +66,33 @@ class TestNumbersToDigits(unittest.TestCase):
         # двадцять п’ять: 20 + 5, written with U+2019
         self.assertEqual(normalize("постав таймер на двадцять п’ять хвилин", "uk-UA"), "постав таймер на 25 хвилин")
 
-    def test_azerbaijani(self):
-        # iyirmi beş: 20 + 5
-        self.assertEqual(normalize("iyirmi beş", "az-AZ"), "25")
+    def test_azerbaijani_keeps_words(self):
+        # no shipped skill locale measures az, so it is outside NUMBER_LANGUAGES
+        self.assertEqual(normalize("iyirmi beş", "az-AZ"), "iyirmi beş")
+
+    def test_language_outside_set_keeps_words(self):
+        # numtag gives "50 pour 100", "1'altra" and "ni 1": the article, the
+        # percent word and "not a single" are no numbers
+        self.assertEqual(normalize("mets le volume à cinquante pour cent", "fr-FR"),
+                         "mets le volume à cinquante pour cent")
+        self.assertEqual(normalize("un'altra volta", "it-IT"), "un'altra volta")
+        self.assertEqual(normalize("я не пропустил ни одного таймера", "ru-RU"),
+                         "я не пропустил ни одного таймера")
+        # Romanian "o" alone is the pronoun "her", Hungarian "egy" alone the article "a"
+        self.assertEqual(normalize("o", "ro-RO"), "o")
+        self.assertEqual(normalize("egy", "hu-HU"), "egy")
+
+    def test_language_in_set_without_own_normalizer(self):
+        # Finnish kymmeneksi: translative case of kymmenen, 10
+        self.assertEqual(normalize("laita ajastin kymmeneksi minuutiksi", "fi-FI"),
+                         "laita ajastin 10 minuutiksi")
+        # Turkish üç: 3
+        self.assertEqual(normalize("önümüzdeki üç gün", "tr-TR"), "önümüzdeki 3 gün")
+
+    def test_digits_keep_their_form(self):
+        # numtag reads "05" as 5 and "1.000" as 1000; the user wrote digits, so they stay
+        self.assertEqual(normalize("set a timer for 05 minutes", "en-US"), "set a timer for 05 minutes")
+        self.assertEqual(normalize("custa 1.000 euros", "pt-PT"), "custa 1.000 euros")
 
     def test_plugin_variants(self):
         variants, _ = UtteranceNormalizerPlugin().transform(["vinte e cinco por cento"], {"lang": "pt-PT"})

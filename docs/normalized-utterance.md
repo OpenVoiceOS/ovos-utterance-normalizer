@@ -59,9 +59,9 @@ GermanNormalizer().normalize("starte den Timer zum Kochen, zwanzig Minuten!")
 A `config` argument replaces the whole settings dictionary of the class. Keys that it does not give take the defaults of the table above, not the values of the language file:
 
 ```python
-custom = Normalizer(config={"lowercase": True, "remove_symbols": True}, lang="es-ES")
-custom.normalize("¡Pon Veinticinco Minutos!")
-# 'pon 25 minutos'
+custom = Normalizer(config={"lowercase": True, "remove_symbols": True}, lang="pt-PT")
+custom.normalize("Põe Vinte E Cinco Minutos!")
+# 'põe 25 minutos'
 ```
 
 The plugin does not pass a `config` argument. The settings of the normalized candidate come only from the language files.

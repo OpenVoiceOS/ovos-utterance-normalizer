@@ -11,6 +11,10 @@ from ovos_utterance_normalizer.tokenization import word_tokenize
 # common meaning is no number ("um segundo", "half past") 0.4: both stay words
 MIN_NUMBER_CONFIDENCE = 0.5
 
+# A language enters this set when a value check over every shipped skill locale finds no new wrong digit
+NUMBER_LANGUAGES = frozenset({"an", "ar", "bg", "cs", "de", "en", "et", "fi", "he", "hr",
+                              "id", "nb", "pt", "sk", "sl", "tr", "uk"})
+
 
 class Normalizer:
     # taken from lingua_franca
@@ -110,9 +114,10 @@ class Normalizer:
 
         Only cardinals change. Ordinals ("primeiro"), fractions and decimals
         ("sete e meia", often a clock time) stay words, and so do the mentions
-        numtag scores below MIN_NUMBER_CONFIDENCE.
+        numtag scores below MIN_NUMBER_CONFIDENCE. A language outside
+        NUMBER_LANGUAGES keeps all its words.
         """
-        if not self.lang:
+        if not self.lang or self.lang.replace("_", "-").split("-")[0].lower() not in NUMBER_LANGUAGES:
             return utterance
         try:
             mentions = tag_numbers(utterance, self.lang)

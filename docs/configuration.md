@@ -8,11 +8,14 @@ The package needs Python 3.11 or newer.
 uv pip install --prerelease=allow ovos-utterance-normalizer
 ```
 
-The package registers the entry point `ovos-utterance-normalizer` in the group `opm.transformer.text`. The plugin priority is 1. OVOS-TRANSFORM-1 §4 runs a lower priority number first, so this plugin runs before utterance transformers with a higher number. An `order` list in the `utterance_transformers` section sets a different order.
+The package registers the entry point `ovos-utterance-normalizer` in the group `opm.transformer.text`. The plugin priority is 1. The order of the utterance transformers depends on the loader:
+
+- ovos-core 2.1.1 sorts the transformers by priority with `reverse=True` (`ovos_core/transformers.py`). A higher number runs first, so this plugin runs after the transformers with a higher number. ovos-core 2.1.1 reads no `order` key.
+- The loader of ovos-plugin-manager 3.1 runs a lower number first, as OVOS-TRANSFORM-1 §4 says. So this plugin runs before the transformers with a higher number. An `order` list in the `utterance_transformers` section sets a different order.
 
 ## Turn the plugin on
 
-The plugin loads only when it is installed and the `utterance_transformers` section of `mycroft.conf` names it, as a key or in the `order` list. The default `mycroft.conf` of ovos-config holds this entry:
+The plugin loads only when it is installed and the `utterance_transformers` section of `mycroft.conf` names it as a key. The loader of ovos-plugin-manager 3.1 also loads it when the `order` list of the section names it. The default `mycroft.conf` of ovos-config holds this entry:
 
 ```json
 "utterance_transformers": {
@@ -61,7 +64,7 @@ Set `active` to `false`:
 }
 ```
 
-With this configuration, the `UtteranceTransformersService` of ovos-plugin-manager loads no `ovos-utterance-normalizer`. A section without the `ovos-utterance-normalizer` key also turns the plugin off, unless the `order` list of the section names the plugin. A name in the `order` list turns the plugin on without its own key.
+With this configuration, the `UtteranceTransformersService` of ovos-core 2.1.1 and the one of ovos-plugin-manager 3.1 load no `ovos-utterance-normalizer`. A section without the `ovos-utterance-normalizer` key also turns the plugin off. For ovos-plugin-manager 3.1, a name in the `order` list turns the plugin on without its own key.
 
 ## Normalizer settings
 
