@@ -9,14 +9,14 @@ The normalizer writes the value in place of the mention only when all of these a
 - The language is in `NUMBER_LANGUAGES` (see [Languages with number reading](#languages-with-number-reading)).
 - The kind is cardinal.
 - The form is not digits. A mention in words ("vinte e cinco") or in mixed form ("2 milhões") changes. A mention in digits ("2,5") stays as written, so the decimal and group marks of the language stay.
-- The confidence is 0.5 or more (`MIN_NUMBER_CONFIDENCE` in `normalizer.py`).
+- The mention has no reason: numtag marks an article with `Reason.ARTICLE` and a word with another meaning with `Reason.HOMOGRAPH` (`WORD_REASONS` in `normalizer.py`).
 
 All other mentions keep their words:
 
 - Ordinals: "primeiro", "the twenty first", "der dritte".
 - Fractions and decimals: "sete e meia", "two point five", "eins komma fünf". Many of these name a clock time ("a las seis y media"), and a clock reader reads the words better than "6.5".
-- Most articles. numtag gives an article before a noun the confidence 0.3 ("uma pizza", "ein Bier"). Some articles get a higher confidence and become digits. See [Known misreads](#known-misreads).
-- Words whose usual meaning is no number. numtag gives these the confidence 0.4 ("half past seven").
+- Most articles. numtag marks an article before a noun with `Reason.ARTICLE` ("uma pizza", "ein Bier"). Some articles carry no reason and become digits. See [Known misreads](#known-misreads).
+- Words whose usual meaning is no number. numtag marks these with `Reason.HOMOGRAPH` (Czech "jednou", "once").
 
 The normalizer replaces the mentions from the last to the first, so each span stays correct while the text changes.
 

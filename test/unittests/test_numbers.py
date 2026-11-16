@@ -58,6 +58,14 @@ class TestNumbersToDigits(unittest.TestCase):
         # "nou" is "new" here
         self.assertEqual(normalize("crea un esdeveniment nou", "ca-ES"), "crea un esdeveniment nou")
 
+    def test_czech_homograph_stays_word(self):
+        # "jednou" is "once", not the number 1: numtag marks it as a homograph
+        self.assertEqual(normalize("nastav časovač jednou", "cs-CZ"), "nastav časovač jednou")
+
+    def test_catalan_homograph_stays_word(self):
+        # "nou" is "new" in "un nou enregistrament", not 9
+        self.assertEqual(normalize("un nou enregistrament", "ca-ES"), "un nou enregistrament")
+
     def test_czech(self):
         # 20 + 5
         self.assertEqual(normalize("nastav časovač na dvacet pět minut", "cs-CZ"), "nastav časovač na 25 minut")

@@ -3,13 +3,13 @@ import re
 from os.path import dirname
 from typing import List, Dict
 
-from numtag import Form, Kind, tag_numbers
+from numtag import Form, Kind, Reason, tag_numbers
 
 from ovos_utterance_normalizer.tokenization import word_tokenize
 
-# numtag scores a lone article ("uma pizza", "ein Bier") 0.3 and a word whose
-# common meaning is no number ("um segundo", "half past") 0.4: both stay words
-MIN_NUMBER_CONFIDENCE = 0.5
+# numtag marks a lone article ("uma pizza", "ein Bier") and a word whose
+# common meaning is no number ("jednou", "half past"): both stay words
+WORD_REASONS = frozenset({Reason.ARTICLE, Reason.HOMOGRAPH})
 
 # A language enters this set when a value check over every shipped skill locale finds no new wrong digit
 NUMBER_LANGUAGES = frozenset({"an", "ar", "bg", "cs", "de", "en", "es", "et", "fi", "he",
@@ -114,7 +114,7 @@ class Normalizer:
 
         Only cardinals change. Ordinals ("primeiro"), fractions and decimals
         ("sete e meia", often a clock time) stay words, and so do the mentions
-        numtag scores below MIN_NUMBER_CONFIDENCE. A language outside
+        numtag marks as an article or as a word with another meaning. A language outside
         NUMBER_LANGUAGES keeps all its words.
         """
         if not self.lang or self.lang.replace("_", "-").split("-")[0].lower() not in NUMBER_LANGUAGES:
@@ -125,7 +125,7 @@ class Normalizer:
             return utterance
         for mention in reversed(mentions):
             if mention.kind is not Kind.CARDINAL or mention.form is Form.DIGITS \
-                    or mention.confidence < MIN_NUMBER_CONFIDENCE:
+                    or mention.reasons & WORD_REASONS:
                 continue
             start, end = mention.char_span
             utterance = utterance[:start] + mention.value + utterance[end:]
