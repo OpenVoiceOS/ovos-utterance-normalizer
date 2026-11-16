@@ -66,6 +66,26 @@ class TestNumbersToDigits(unittest.TestCase):
         # "nou" is "new" in "un nou enregistrament", not 9
         self.assertEqual(normalize("un nou enregistrament", "ca-ES"), "un nou enregistrament")
 
+    def test_galician(self):
+        # "dez" is 10; the article "unha" stays a word
+        self.assertEqual(normalize("pon un temporizador de dez minutos", "gl-ES"),
+                         "pon un temporizador de 10 minutos")
+        self.assertEqual(normalize("pon unha alarma", "gl-ES"), "pon unha alarma")
+        self.assertEqual(normalize("unha", "gl-ES"), "unha")
+
+    def test_hungarian(self):
+        # "két" is 2; the article "egy" stays a word
+        self.assertEqual(normalize("ébressz fel két óra múlva", "hu-HU"), "ébressz fel 2 óra múlva")
+        self.assertEqual(normalize("mondj egy viccet", "hu-HU"), "mondj egy viccet")
+        self.assertEqual(normalize("egy", "hu-HU"), "egy")
+
+    def test_romanian(self):
+        # "zece" is 10; "o" is the article or the pronoun "her", never the number 1
+        self.assertEqual(normalize("setează un cronometru de zece minute", "ro-RO"),
+                         "setează un cronometru de 10 minute")
+        self.assertEqual(normalize("pune o alarmă", "ro-RO"), "pune o alarmă")
+        self.assertEqual(normalize("o", "ro-RO"), "o")
+
     def test_czech(self):
         # 20 + 5
         self.assertEqual(normalize("nastav časovač na dvacet pět minut", "cs-CZ"), "nastav časovač na 25 minut")
@@ -86,18 +106,17 @@ class TestNumbersToDigits(unittest.TestCase):
         self.assertEqual(normalize("un'altra volta", "it-IT"), "un'altra volta")
         self.assertEqual(normalize("я не пропустил ни одного таймера", "ru-RU"),
                          "я не пропустил ни одного таймера")
-        # Romanian "o" alone is the pronoun "her", Hungarian "egy" alone the article "a"
-        self.assertEqual(normalize("o", "ro-RO"), "o")
-        self.assertEqual(normalize("egy", "hu-HU"), "egy")
+        # numtag reads "un" before "nou" (new) as 1, and "одно" in "the same" as 1
+        self.assertEqual(normalize("un nou enregistrament", "ca-ES"), "un nou enregistrament")
+        self.assertEqual(normalize("обнови календарь чтобы было одно и то же", "ru-RU"),
+                         "обнови календарь чтобы было одно и то же")
 
     def test_idiom_keeps_number_value(self):
         # numtag does no idiom detection: "mil" is 1000 in "mil gracias" too
         self.assertEqual(normalize("mil gracias", "es-ES"), "1000 gracias")
         self.assertEqual(normalize("desde cero", "es-ES"), "desde 0")
-        # da and gl are outside NUMBER_LANGUAGES: numtag reads an article as 1
-        # (da "en" before a hyphenated noun, gl "unha" alone)
+        # da is outside NUMBER_LANGUAGES: numtag reads "en" before a hyphenated noun as 1
         self.assertEqual(normalize("tusind tak", "da-DK"), "tusind tak")
-        self.assertEqual(normalize("unha", "gl-ES"), "unha")
 
     def test_language_in_set_without_own_normalizer(self):
         # Finnish kymmeneksi: translative case of kymmenen, 10

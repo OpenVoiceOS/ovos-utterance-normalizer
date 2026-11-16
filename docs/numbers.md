@@ -15,7 +15,7 @@ All other mentions keep their words:
 
 - Ordinals: "primeiro", "the twenty first", "der dritte".
 - Fractions and decimals: "sete e meia", "two point five", "eins komma fünf". Many of these name a clock time ("a las seis y media"), and a clock reader reads the words better than "6.5".
-- Most articles. numtag marks an article before a noun with `Reason.ARTICLE` ("uma pizza", "ein Bier"). Some articles carry no reason and become digits. See [Known misreads](#known-misreads).
+- Articles. numtag marks an article with `Reason.ARTICLE` ("uma pizza", "ein Bier"). See [Known misreads](#known-misreads).
 - Words whose usual meaning is no number. numtag marks these with `Reason.HOMOGRAPH` (Czech "jednou", "once").
 
 The normalizer replaces the mentions from the last to the first, so each span stays correct while the text changes.
@@ -53,7 +53,7 @@ fr is not in `NUMBER_LANGUAGES`, so its number words stay.
 
 The normalizer reads numbers only in the languages of `NUMBER_LANGUAGES` in `normalizer.py`:
 
-an, ar, bg, cs, de, en, es, et, fi, he, hr, id, nb, pt, sk, sl, tr, uk
+an, ar, bg, cs, de, en, es, et, fi, gl, he, hr, hu, id, nb, pt, ro, sk, sl, tr, uk
 
 The normalizer compares the first subtag of the language tag with the set, so "pt-BR" and "pt_PT" are in the set. Every other language keeps all its number words, also when numtag has a lexicon for it.
 
@@ -61,7 +61,8 @@ A language enters the set when a value check finds no new wrong digit for it. Th
 
 numtag has a lexicon for more languages. These languages are not in the set:
 
-- ca, da, el, eu, fa, fr, gl, hu, it, kab, nl, oc, pl, ro, ru and sv: the value check found new wrong digits. See [Known misreads](#known-misreads).
+- ca and ru: the value check found new wrong digits. See [Known misreads](#known-misreads).
+- da, el, eu, fa, fr, it, kab, nl, oc, pl and sv: no value check has run on the current numtag, so they stay out.
 - ast, az, fy, mwl and nn: no shipped skill locale has a number for the value check to examine.
 
 ## Idioms, titles and names
@@ -84,17 +85,12 @@ The normalizer gives numtag the full language tag of the utterance. numtag reads
 
 numtag reads some words as numbers when they are not numbers in the sentence. The fixes for these misreads belong in numtag.
 
-In the languages of the set, the normalizer writes these digits. The normalizer before numtag wrote the same digits:
+In the languages of the set, the normalizer writes this digit. The normalizer before numtag wrote the same digit:
 
-- an article before a hyphenated noun, as in Portuguese "uma quinta-feira" and German "eine Audio-Erinnerung";
 - the English pronoun "one", as in "read the next one".
 
 These misreads keep a language out of the set:
 
-- the percent word read as 100: Catalan "per cent", French "pour cent", Italian "per cento", Greek "τοις εκατό" and Occitan "per cent". French "cinquante pour cent" gives "50 pour 100".
-- the Italian elided article "un'": "un'altra volta" gives "1'altra volta".
-- an article before a hyphenated noun in Danish, Dutch, French, Kabyle and Swedish: French "un rendez-vous" gives "1 rendez-vous", and Dutch "een audio-opname" gives "1 audio-opname".
-- the Basque article "bat" after a noun: "pantaila-argazki bat" gives "pantaila-argazki 1".
-- Persian weekday names written with a space: "سه شنبه" (Tuesday) gives "3 شنبه".
-- "not a single one" and "the same": Russian "ни одного" gives "ни 1", "одно и то же" gives "1 и то же", and Polish "ani jedna" gives "ani 1".
-- an article or a pronoun alone in a vocabulary file: Galician "un" and "unha" and Hungarian "egy" (the article "a"), and Romanian "o" (the pronoun "her"), give "1".
+- a Catalan article before "nou" (new): "un nou enregistrament" gives "1 nou enregistrament".
+- a Catalan "per cent" with no number before it: "al per cent" gives "al per 100".
+- the Russian pronoun "одно" in "the same": "одно и то же" gives "1 и то же".
