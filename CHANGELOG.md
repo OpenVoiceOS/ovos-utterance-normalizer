@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.8a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.8a1) (2026-11-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.7a1...0.2.8a1)
+
+**Merged pull requests:**
+
+- fix: read Hungarian numbers with their case suffix after a hyphen [\#33](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/pull/33) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.2.7a1](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/tree/0.2.7a1) (2026-11-16)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-utterance-normalizer/compare/0.2.6a1...0.2.7a1)
