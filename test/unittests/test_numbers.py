@@ -120,9 +120,38 @@ class TestNumbersToDigits(unittest.TestCase):
         self.assertEqual(normalize("desde cero", "es-ES"), "desde 0")
         # da is outside NUMBER_LANGUAGES: no value check covers it
         self.assertEqual(normalize("tusind tak", "da-DK"), "tusind tak")
-        # hu is outside NUMBER_LANGUAGES: "ötkor" is 5 with the suffix "-kor", which a bare digit loses
+
+    def test_hungarian_suffix_follows_digit_after_hyphen(self):
+        # AkH 11 265 d): a suffix joins a digit with a hyphen
         self.assertEqual(normalize("hozz létre egy emlékeztetőt hogy ötkor vegyek kenyeret", "hu-HU"),
-                         "hozz létre egy emlékeztetőt hogy ötkor vegyek kenyeret")
+                         "hozz létre egy emlékeztetőt hogy 5-kor vegyek kenyeret")
+        self.assertEqual(normalize("hétfőtől péntekig este hatkor szólj", "hu-HU"),
+                         "hétfőtől péntekig este 6-kor szólj")
+        self.assertEqual(normalize("ébressz fel tízkor", "hu-HU"), "ébressz fel 10-kor")
+        self.assertEqual(normalize("ébressz fel huszonötkor", "hu-HU"), "ébressz fel 25-kor")
+        self.assertEqual(normalize("kettőre állítsd be", "hu-HU"), "2-re állítsd be")
+
+    def test_hungarian_suffix_keeps_the_form_of_the_spoken_numeral(self):
+        # AkH 11 102 f): the assimilated form stays (4-gyel, 15%-kal); harmony follows the spoken numeral
+        self.assertEqual(normalize("hattal", "hu-HU"), "6-tal")
+        self.assertEqual(normalize("öttel", "hu-HU"), "5-tel")
+        self.assertEqual(normalize("hárommal", "hu-HU"), "3-mal")
+        self.assertEqual(normalize("tízzel", "hu-HU"), "10-zel")
+        self.assertEqual(normalize("ötvennel", "hu-HU"), "50-nel")
+        self.assertEqual(normalize("öttől", "hu-HU"), "5-től")
+        self.assertEqual(normalize("hattól", "hu-HU"), "6-tól")
+        self.assertEqual(normalize("öthöz", "hu-HU"), "5-höz")
+        self.assertEqual(normalize("hathoz", "hu-HU"), "6-hoz")
+
+    def test_hungarian_uncertain_suffix_stays_word(self):
+        # wrong harmony, a suffix outside the tables, a changed stem ("hármat"), "háromszor" and "egykor" (once) keep their words
+        for word in ("hattel", "öttal", "hattől", "öttól", "hathez", "öthoz", "hatre", "hatot", "ötöt", "hármat", "háromszor", "egykor", "hétkor", "hatos"):
+            self.assertEqual(normalize(f"szólj {word}", "hu-HU"), f"szólj {word}")
+        self.assertEqual(normalize("egy órakor", "hu-HU"), "egy órakor")
+
+    def test_hungarian_number_without_suffix(self):
+        self.assertEqual(normalize("állíts be öt percet", "hu-HU"), "állíts be 5 percet")
+        self.assertEqual(normalize("ötszáz", "hu-HU"), "500")
 
     def test_language_in_set_without_own_normalizer(self):
         # Finnish kymmeneksi: translative case of kymmenen, 10
